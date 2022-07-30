@@ -53,11 +53,11 @@ class SportCategoryFragment : Fragment() {
     ): View? {
         binding = FragmentSportCategoryBinding.inflate(layoutInflater)
 
-        setupRecyclerView()
-
-        sportcategoryAdapter.setOnItemClickListenerString {
-            sharedViewModel.sportId.value = it.toString()
-        }
+//        setupRecyclerView()
+//
+//        sportcategoryAdapter.setOnItemClickListenerString {
+//            sharedViewModel.sportId.value = it.toString()
+//        }
 
         binding.selectAllCategory.setOnClickListener {
             sharedViewModel.sportId.value = "0"
