@@ -6,8 +6,8 @@
     app:startDestination="@id/sportCategoryFragment">
     <fragment
         android:id="@+id/countryFragment"
-        android:name="com.football.challengemyteams.fragments.CountryFragment"
-        android:label="Countries"
+        android:name="com.league2022of.proball.fragments.TeamFragment"
+        android:label="Team"
         tools:layout="@layout/fragment_country" >
         <action
             android:id="@+id/action_countryFragment_to_sportCategoryFragment"
@@ -18,16 +18,19 @@
     </fragment>
     <fragment
         android:id="@+id/sportCategoryFragment"
-        android:name="com.football.challengemyteams.fragments.SportCategoryFragment"
-        android:label="Sport Categories" >
+        android:name="com.league2022of.proball.fragments.MainPageFragment"
+        android:label="Main Page" >
         <action
             android:id="@+id/action_sportCategoryFragment_to_countryFragment"
             app:destination="@id/countryFragment" />
+        <action
+            android:id="@+id/action_sportCategoryFragment_to_matchListFragment"
+            app:destination="@id/matchListFragment" />
     </fragment>
     <fragment
         android:id="@+id/matchListFragment"
-        android:name="com.football.challengemyteams.fragments.MatchListFragment"
-        android:label="Matches List"
+        android:name="com.league2022of.proball.fragments.NewGameFragment"
+        android:label="New Game"
         tools:layout="@layout/fragment_match_list" >
         <action
             android:id="@+id/action_matchListFragment_to_detailFragment"
@@ -35,32 +38,52 @@
     </fragment>
     <fragment
         android:id="@+id/privacyPolicyFragment"
-        android:name="com.football.challengemyteams.fragments.PrivacyPolicyFragment"
-        android:label="Privacy Policy"
-        tools:layout="@layout/fragment_privacy_policy" />
+        android:name="com.league2022of.proball.fragments.NewPlayerInfoFragment"
+        android:label="Player Info"
+        tools:layout="@layout/fragment_privacy_policy" >
+        <action
+            android:id="@+id/action_privacyPolicyFragment_to_sportCategoryFragment"
+            app:destination="@id/sportCategoryFragment" />
+        <argument
+            android:name="playerModel"
+            app:argType="com.league2022of.proball.model.PlayerModel" />
+    </fragment>
     <fragment
         android:id="@+id/myMatchesFragment"
-        android:name="com.football.challengemyteams.fragments.MyMatchesFragment"
-        android:label="My Matches"
-        tools:layout="@layout/fragment_my_matches" />
+        android:name="com.league2022of.proball.fragments.NewPlayerFragment"
+        android:label="New Player"
+        tools:layout="@layout/fragment_my_matches" >
+        <action
+            android:id="@+id/action_myMatchesFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment" />
+        <argument
+            android:name="imageId"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.football.challengemyteams.fragments.DetailFragment"
-        android:label="Details"
+        android:name="com.league2022of.proball.fragments.GameFragment"
+        android:label="Game"
         tools:layout="@layout/fragment_detail" >
         <argument
             android:name="idModel"
-            app:argType="com.football.challengemyteams.model.Events" />
+            app:argType="com.league2022of.proball.model.Events" />
         <action
             android:id="@+id/action_detailFragment_to_matchListFragment3"
             app:destination="@id/matchListFragment" />
         <action
             android:id="@+id/action_detailFragment_to_myMatchesFragment"
             app:destination="@id/myMatchesFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_sportCategoryFragment"
+            app:destination="@id/sportCategoryFragment" />
+        <action
+            android:id="@+id/action_detailFragment_to_matchListFragment"
+            app:destination="@id/matchListFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.football.challengemyteams.fragments.SettingsFragment"
+        android:name="com.league2022of.proball.fragments.SettingsFragment"
         android:label="Settings"
         tools:layout="@layout/fragment_settings" >
         <action

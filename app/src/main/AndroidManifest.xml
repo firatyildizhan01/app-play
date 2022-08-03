@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.football.challengemyteams">
+    package="com.league2022of.proball">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name="com.football.challengemyteams.MyApplication"
+        android:name="com.league2022of.proball.MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher_match"
+        android:icon="@mipmap/ic_launcher_player"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_match"
+        android:roundIcon="@mipmap/ic_launcher_player"
         android:hardwareAccelerated="false"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
         android:theme="@style/Theme.Paging3">
-        <activity android:name="com.football.challengemyteams.MainActivity"
+        <activity android:name="com.league2022of.proball.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>

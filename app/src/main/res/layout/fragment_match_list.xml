@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.MatchListFragment">
+    tools:context=".fragments.NewGameFragment">
 
     <ImageView
         android:id="@+id/orangeTwo"
@@ -34,7 +34,6 @@
         android:id="@+id/imageView3"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:src="@drawable/ic_profil_image"
         app:layout_constraintBottom_toTopOf="@+id/recyclerviewMatchList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.111"

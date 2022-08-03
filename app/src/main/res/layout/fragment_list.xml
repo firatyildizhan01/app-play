@@ -4,7 +4,7 @@
     <data>
         <variable
             name="rickmorty"
-            type="com.football.challengemyteams.model.Events" />
+            type="com.league2022of.proball.model.Events" />
     </data>
 
 
