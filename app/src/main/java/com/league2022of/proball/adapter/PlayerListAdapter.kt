@@ -3,10 +3,12 @@ package com.league2022of.proball.adapter
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.league2022of.proball.databinding.CardPlayerBinding
+import com.league2022of.proball.fragments.TeamFragmentDirections
 import com.league2022of.proball.model.PlayerModel
 
 class PlayerListAdapter : RecyclerView.Adapter<PlayerListAdapter.ToDoViewHolder>() {
@@ -44,20 +46,31 @@ class PlayerListAdapter : RecyclerView.Adapter<PlayerListAdapter.ToDoViewHolder>
         var y = sportList
         val currentToDo = sportList[position]
 
+
+
         holder.binding.apply {
 
-            playerName.text = currentToDo.playerName
-            roleText.text = currentToDo.role
+            playerImage.setImageResource(currentToDo.imageUrl)
 
+            playerName.text = currentToDo.playerName
+
+            playerImage.setOnClickListener {
+                Navigation.findNavController(it).navigate(TeamFragmentDirections.actionCountryFragmentToPlayerInfoFragment(currentToDo))
+            }
+
+//
+//            roleText.text = currentToDo.role
+//
             if(currentToDo.roster == "0"){
-                rosterText.text = "TO ROSTER"
+                forward.text = "TO ROSTER"
             }
             else{
-                rosterText.text = "TO RESERVE"
+                forward.text = "TO RESERVE"
             }
 
+
         }
-            holder.binding.rosterText.setOnClickListener {
+            holder.binding.forward.setOnClickListener {
 
             onItemClickListenerString?.let { currentToDo.roster?.let { it1 -> it(it1) } }
             onItemClickListenerStringId?.let { it(currentToDo.id.toString()) }

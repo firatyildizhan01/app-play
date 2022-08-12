@@ -29,5 +29,18 @@ class DataStoreSport() {
         return preferences[dataStoreKey]
     }
 
+    suspend fun saveInt(key: String, value: Int) {
+        val dataStoreKey = preferencesKey<Int>(key)
+        dataStore.edit { settings ->
+            settings[dataStoreKey] = value
+        }
+    }
+
+    suspend fun readInt(key: String): Int? {
+        val dataStoreKey = preferencesKey<Int>(key)
+        val preferences = dataStore.data.first()
+        return preferences[dataStoreKey]
+    }
+
 }
 

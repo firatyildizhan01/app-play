@@ -42,7 +42,7 @@
         app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/ic_stars" />
 
-    <ImageView
+    <TextView
         android:id="@+id/imageView21"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,13 +50,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:text="NEW PLAYER!"
+        android:textColor="#FFE700"
+        android:textStyle="bold"
+        android:textSize="48sp"
         app:layout_constraintVertical_bias="0.100000024"
         app:srcCompat="@drawable/ic_new_player" />
 
     <ImageView
         android:id="@+id/imageView22"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +72,7 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ROBERT LEWANDOWSKI"
+        android:text="TEAM"
         android:textColor="@color/white"
         android:textSize="32sp"
         android:textStyle="bold"

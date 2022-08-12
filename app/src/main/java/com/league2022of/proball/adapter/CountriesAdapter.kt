@@ -68,4 +68,6 @@ class CountriesAdapter : RecyclerView.Adapter<CountriesAdapter.ToDoViewHolder>()
     fun setOnItemClickListenerIntCountry(listenerInt: (Int) -> Unit) {
         onItemClickListenerIntCountry = listenerInt
     }
+
+
 }

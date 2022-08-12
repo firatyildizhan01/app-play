@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide
 import com.league2022of.proball.databinding.FragmentGameVictoryBinding
 import com.league2022of.proball.model.ListModel
 import com.league2022of.proball.utils.DataStoreSport
+import com.league2022of.proball.viewmodel.CharacterViewModel
 import com.league2022of.proball.viewmodel.SportViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -32,6 +33,7 @@ class GameFragment : Fragment() {
     var teamSelectNumber = 0
 
     private val sportViewModel : SportViewModel by viewModels()
+    private val characterViewModel : CharacterViewModel by viewModels()
 
 //    private val arguments : DetailFragmentArgs by navArgs()
 
@@ -42,7 +44,9 @@ class GameFragment : Fragment() {
 
     var resultTextDetailforCat = ""
 
-    var randomOppositeTeam = ""
+    var randomOppositeTeam = 0
+
+    var oppositeTeamName = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,6 +59,29 @@ class GameFragment : Fragment() {
     ): View? {
 
         binding = FragmentGameVictoryBinding.inflate(layoutInflater)
+
+        activity?.let {
+            characterViewModel.spoyerResponse.observe(it) { spor ->
+
+                var u = spor.games_live.size
+
+
+                var randomTeam = Random().nextInt(spor.games_live.size)
+
+                var spoyerModels = spor.games_live.elementAtOrNull(randomTeam)?.home
+
+                var kata = spoyerModels?.image_id
+
+                Glide.with(binding.root)
+                    .load("https://spoyer.com/api/team_img/soccer/${spoyerModels?.image_id}.png")
+                    .centerCrop()
+                    .into(binding.textView9)
+
+                oppositeTeamName = spoyerModels?.name ?: "Team 1"
+
+                binding.textView10.text = oppositeTeamName
+            }
+        }
 
 //        binding.backgroundFirst.setOnClickListener{
 //            binding.backgroundFirst.setBackgroundColor(Color.parseColor("#FFE9BF"));
@@ -94,12 +121,9 @@ class GameFragment : Fragment() {
         val mCountDownTimer: CountDownTimer
         var i = 0
 
-        randomOppositeTeam = (0..500).random().toString()
+        randomOppositeTeam = Random().nextInt(500)
 
-        Glide.with(binding.root)
-            .load("https://spoyer.com/api/team_img/soccer/${randomOppositeTeam}.png")
-            .centerCrop()
-            .into(binding.textView9)
+
 
         lifecycleScope.launch {
 //            val value = read("hello")
@@ -164,7 +188,7 @@ class GameFragment : Fragment() {
                         ListModel(
                             0,
                             valueUri,
-                            valueUri,
+                            oppositeTeamName,
                             team1.value.toString(),
                             team2.value.toString(),
                             resultTextDetailforCat
@@ -177,7 +201,7 @@ class GameFragment : Fragment() {
         mCountDownTimer.start()
 
         Handler().postDelayed({
-            var randomOne = (0..2).random()
+            var randomOne = (0..1).random()
             var randomTwo = (0..1).random()
 
             team1.value = team1.value?.plus(randomOne)
@@ -190,7 +214,7 @@ class GameFragment : Fragment() {
         }, 3000)
 
         Handler().postDelayed({
-            var randomOne = (0..2).random()
+            var randomOne = (0..1).random()
             var randomTwo = (0..1).random()
 
             team1.value = team1.value?.plus(randomOne)
@@ -202,8 +226,8 @@ class GameFragment : Fragment() {
         }, 6000)
 
         Handler().postDelayed({
-            var randomthree = (0..2).random()
-            var randomfour = 0
+            var randomthree = (0..1).random()
+            var randomfour = (0..1).random()
 
             team1.value = team1.value?.plus(randomthree)
             team2.value = team2.value?.plus(randomfour)
@@ -211,11 +235,10 @@ class GameFragment : Fragment() {
             binding.firstTeamResult.text = team1.value.toString()
             binding.SecondTeamResult.text = team2.value.toString()
 
-
         }, 9000)
 
         Handler().postDelayed({
-            var randomfive = (0..2).random()
+            var randomfive = (0..1).random()
             var randomsix = (0..1).random()
 
             team1.value = team1.value?.plus(randomfive)
@@ -224,10 +247,7 @@ class GameFragment : Fragment() {
             binding.firstTeamResult.text = team1.value.toString()
             binding.SecondTeamResult.text = team2.value.toString()
 
-
         }, 15000)
-
-
 
         binding.imageGoToMenu.setOnClickListener {
 
@@ -237,7 +257,7 @@ class GameFragment : Fragment() {
 
         binding.imageNewGame.setOnClickListener {
 
-            findNavController().navigate(GameFragmentDirections.actionDetailFragmentToMyMatchesFragment(randomOppositeTeam))
+            findNavController().navigate(GameFragmentDirections.actionDetailFragmentToMyMatchesFragment(randomOppositeTeam.toString()))
 
         }
 
@@ -245,33 +265,5 @@ class GameFragment : Fragment() {
 
             findNavController().navigate(com.league2022of.proball.R.id.action_detailFragment_to_matchListFragment)
         }
-
-
-//        binding.backButtonDetail.setOnClickListener {
-//            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToMatchListFragment3())
-//        }
-//
-//        binding.imageSelectTeamButton.setOnClickListener {
-//
-//            val date = Date((arguments.idModel?.game_start ?: 0) * 1000L)
-//            val format: DateFormat = SimpleDateFormat("yyyyMMdd")
-//            format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"))
-//            val formattedDay: String = format.format(date)
-//
-//            sportViewModel.insertEvents(ListModel(
-//                0,
-//                arguments.idModel.opp_1_name_en,
-//                arguments.idModel.opp_2_name_en,
-//                arguments.idModel.game_oc_list.elementAtOrNull(0)?.oc_rate.toString(),
-//                arguments.idModel.game_oc_list.elementAtOrNull(1)?.oc_rate.toString(),
-//                formattedDay,
-//                arguments.idModel.score_full,
-//                teamSelectNumber,
-//            0
-//            ))
-//
-////            findNavController().navigate(DetailFragmentDirections.actionDetailFragmentToMyMatchesFragment())
-//        }
     }
-
 }

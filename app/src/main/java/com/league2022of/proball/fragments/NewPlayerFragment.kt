@@ -9,10 +9,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
-import com.bumptech.glide.Glide
 import com.league2022of.proball.R
 import com.league2022of.proball.adapter.SportPastAdapter
 import com.league2022of.proball.adapter.SportSelectedAdapter
@@ -24,7 +23,6 @@ import com.league2022of.proball.viewmodel.SharedViewModel
 import com.league2022of.proball.viewmodel.SportViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
 
 @AndroidEntryPoint
 class NewPlayerFragment : Fragment() {
@@ -43,7 +41,12 @@ class NewPlayerFragment : Fragment() {
 
     var teamName = ""
 
-    private val arguments : NewPlayerFragmentArgs by navArgs()
+
+    private var listNumber = MutableLiveData<Int>(0)
+
+
+    var hashMap : HashMap<Int, String> = HashMap ()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +59,29 @@ class NewPlayerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentNewPlayerBinding.inflate(layoutInflater)
+
+        hashMap.put(R.drawable.marcelo , "marcelo")
+        hashMap.put(R.drawable.karimbenzema , "Karim Benzema")
+        hashMap.put(R.drawable.manuelneuer , "Manuel Neuer")
+        hashMap.put(R.drawable.kylianmbappe , "Kylian Mbappe")
+        hashMap.put(R.drawable.lionelmessi , "Lionel Messi")
+        hashMap.put(R.drawable.neymarjr , "Neymar Jr")
+        hashMap.put(R.drawable.ngolokante, "N'golo Kante")
+        hashMap.put( R.drawable.paolamaldini , "Paola Maldini")
+        hashMap.put(R.drawable.pele, "Pele")
+        hashMap.put(R.drawable.petrcech , "Petr Cech")
+        hashMap.put(R.drawable.robertlewandowski , "Robert Lewandowski")
+        hashMap.put(R.drawable.ronaldinho , "Ronaldinho")
+        hashMap.put(R.drawable.abedipele , "Abedi Pele")
+        hashMap.put(R.drawable.casillas, "Casillas")
+        hashMap.put(R.drawable.cristianoronaldo , "Cristiano Ronaldo")
+        hashMap.put(R.drawable.davidginola, "David Ginola")
+        hashMap.put(R.drawable.davidsilva , "David Silva")
+        hashMap.put(R.drawable.diegomaradona , "Diego Maradona")
+        hashMap.put(R.drawable.edenhazard , "Eden Hazard")
+        hashMap.put(R.drawable.fernandomuslera , "Fernando Muslera")
+        hashMap.put(R.drawable.franckribery , "Franck Ribery")
+        hashMap.put(R.drawable.garethbale , "Gareth Bale")
 
 //        setupRecyclerView()
 //        setupRecyclerViewPast()
@@ -73,13 +99,6 @@ class NewPlayerFragment : Fragment() {
         var attack = (1..3).random()
         var defence = (1..3).random()
         var goalie = (1..3).random()
-
-
-        Glide.with(binding.root)
-            .load("https://spoyer.com/api/team_img/soccer/${arguments.imageId}.png")
-            .centerCrop()
-            .into(binding.imageView22)
-
 
         when (attack) {
             1 -> binding.imageAttack1.setImageResource(R.drawable.ic_foot_yellow_ball)
@@ -128,29 +147,84 @@ class NewPlayerFragment : Fragment() {
         }
 
 
-        sportViewModel.insertPlayer(PlayerModel(
-            0,
-            arguments.imageId,
-            teamName,
-            attack.toString(),
-            defence.toString(),
-            goalie.toString(),
-            "fiko",
-            "0"
-        ))
+        lifecycleScope.launch {
+            if(DataStoreSport().readInt("listNumber") != null){
+                listNumber.value = DataStoreSport().readInt("listNumber",)?.plus(1)!!
+            }
+
+            listNumber.value?.let { DataStoreSport().saveInt("listNumber", it) }
+
+            if(listNumber.value!! < 22){
+
+                binding.imageView22.setImageResource(hashMap.keys.elementAtOrNull(listNumber.value!!)!!)
+
+                binding.textView7.text = hashMap[listNumber.value?.let { hashMap.keys.elementAtOrNull(it) }]
+            }
+            else{
+                binding.imageView22.setImageResource(R.drawable.team1)
+
+                binding.textView7.text = "PlayerUnknown"
+
+
+            }
+
+            if(listNumber.value!! < 22){
+                sportViewModel.insertPlayer(PlayerModel(
+                    0,
+                    hashMap.keys.elementAtOrNull(listNumber.value!!)!!,
+                    hashMap[hashMap.keys.elementAtOrNull(listNumber.value!!)],
+                    attack.toString(),
+                    defence.toString(),
+                    goalie.toString(),
+                    "fiko",
+                    "0"
+                ))
+            }
+            else{
+                sportViewModel.insertPlayer(PlayerModel(
+                    0,
+                    R.drawable.team1,
+                    "PlayerUnknown",
+                    attack.toString(),
+                    defence.toString(),
+                    goalie.toString(),
+                    "fiko",
+                    "0"
+                ))
+
+            }
+        }
+
 
         Handler().postDelayed({
 
-            findNavController().navigate(NewPlayerFragmentDirections.actionMyMatchesFragmentToPrivacyPolicyFragment(PlayerModel(
-                0,
-                arguments.imageId,
-                teamName,
-                attack.toString(),
-                defence.toString(),
-                goalie.toString(),
-                "fiko",
-                "0"
-            )))
+            if(listNumber.value!! < 22){
+
+                findNavController().navigate(NewPlayerFragmentDirections.actionMyMatchesFragmentToPrivacyPolicyFragment(PlayerModel(
+                    0,
+                    hashMap.keys.elementAtOrNull(listNumber.value!!)!!,
+                    hashMap[hashMap.keys.elementAtOrNull(listNumber.value!!)],
+                    attack.toString(),
+                    defence.toString(),
+                    goalie.toString(),
+                    "fiko",
+                    "0"
+                )))
+            }
+            else{
+
+                findNavController().navigate(NewPlayerFragmentDirections.actionMyMatchesFragmentToPrivacyPolicyFragment(PlayerModel(
+                    0,
+                       R.drawable.team1,
+                    "PlayerUnknown" ,
+                    attack.toString(),
+                    defence.toString(),
+                    goalie.toString(),
+                    "fiko",
+                    "0"
+                )))
+            }
+
 
         }, 3000)
 
@@ -165,9 +239,9 @@ class NewPlayerFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-
     }
-//
+
+
 //    private fun setupRecyclerView() {
 //        sportSelectedAdapter = SportSelectedAdapter()
 //

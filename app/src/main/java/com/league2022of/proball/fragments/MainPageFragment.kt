@@ -56,8 +56,6 @@ class MainPageFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.let { DataStoreSport().DataStoreFun(it)}
-
-
     }
 
     override fun onCreateView(

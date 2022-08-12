@@ -55,7 +55,6 @@ class SportCategoryAdapter : RecyclerView.Adapter<SportCategoryAdapter.ToDoViewH
 
                 Navigation.findNavController(it).navigate(MainPageFragmentDirections.actionSportCategoryFragmentToCountryFragment())
             }
-
         }
     }
 

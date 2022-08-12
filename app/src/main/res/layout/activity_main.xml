@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
 <!--    <androidx.fragment.app.FragmentContainerView-->
 <!--        android:id="@+id/nav_host_fragment_new"-->
 <!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
@@ -21,7 +20,6 @@
 <!--        app:layout_constraintVertical_bias="1.0"-->
 <!--        app:navGraph="@navigation/nav_graph" />-->
 
-
     <ImageView
         android:id="@+id/backButton"
         android:layout_width="wrap_content"
@@ -33,8 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_backbutton" />
-
-
 
     <include
         android:id="@+id/app_bar_main"

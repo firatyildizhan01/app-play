@@ -12,7 +12,7 @@ import kotlinx.android.parcel.Parcelize
 data class PlayerModel(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val imageUrl: String?,
+    val imageUrl: Int,
     val playerName: String?,
     val attack: String?,
     val defence: String?,

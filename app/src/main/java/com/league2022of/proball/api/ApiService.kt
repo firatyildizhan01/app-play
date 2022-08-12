@@ -1,9 +1,6 @@
 package com.league2022of.proball.api
 
-import com.league2022of.proball.model.Countries
-import com.league2022of.proball.model.ResponseApi
-import com.league2022of.proball.model.SportCategories
-import com.league2022of.proball.model.TournamentResponse
+import com.league2022of.proball.model.*
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -27,6 +24,11 @@ interface ApiService {
     @GET("v1/sports/live/en")
     suspend fun getAllSportCategories(
     ): Response<SportCategories>
+
+
+    @GET("api/en/get.php?login=ayna&token=12784-OhJLY5mb3BSOx0O&task=livedata&sport=soccer")
+    suspend fun getAllSpoyer(
+    ): Response<SpoyerResult>
 
     @Headers("Package: KlUet6y43te8Jg6G9bkDxN36f9X9ZiTkm")
     @GET("v1/event/{game_id}/list/live/en")

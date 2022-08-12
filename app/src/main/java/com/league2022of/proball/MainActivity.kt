@@ -39,11 +39,14 @@ class MainActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.privacyPolicyFragment, R.id.myMatchesFragment,R.id.settingsFragment ,R.id.matchListFragment
+                R.id.sportCategoryFragment, R.id.countryFragment,R.id.matchListFragment
             ), drawerLayout
         )
 
+        findViewById<View>(R.id.nav_view)!!.visibility = View.INVISIBLE
+
         val navigation_view = findViewById<View>(R.id.nav_view) as NavigationView
+        navigation_view.visibility = View.INVISIBLE
         navigation_view.itemTextColor = ColorStateList.valueOf(Color.WHITE)
         navigation_view.itemIconTintList = null
 

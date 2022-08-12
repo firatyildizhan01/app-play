@@ -5,20 +5,20 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/sportCategoryFragment"
+            android:title="Main Page"
+            android:icon="@drawable/ic_baseline_sports_soccer_24"/>
+        <item
+            android:id="@+id/countryFragment"
+            android:title="Team Page"
+            android:icon="@drawable/ic_baseline_sports_soccer_24"/>
+        <item
             android:id="@+id/matchListFragment"
-            android:title="MatchList"
-            android:icon="@drawable/ic_baseline_account_circle_24"/>
-        <item
-            android:id="@+id/myMatchesFragment"
-            android:title="My Matches"
-            android:icon="@drawable/ic_baseline_turned_in_not_24"/>
-        <item
-            android:id="@+id/settingsFragment"
-            android:title="Settings"
-            android:icon="@drawable/ic_baseline_settings_24"/>
-        <item
-            android:id="@+id/privacyPolicyFragment"
-            android:title="Privacy Policy"
-            android:icon="@drawable/ic_baseline_info_24"/>
+            android:title="New Game"
+            android:icon="@drawable/ic_baseline_sports_soccer_24"/>
+<!--        <item-->
+<!--            android:id="@+id/privacyPolicyFragment"-->
+<!--            android:title="Privacy Policy"-->
+<!--            android:icon="@drawable/ic_baseline_info_24"/>-->
     </group>
 </menu>

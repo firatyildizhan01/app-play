@@ -15,6 +15,9 @@
         <action
             android:id="@+id/action_countryFragment_to_matchListFragment"
             app:destination="@id/matchListFragment" />
+        <action
+            android:id="@+id/action_countryFragment_to_playerInfoFragment"
+            app:destination="@id/playerInfoFragment" />
     </fragment>
     <fragment
         android:id="@+id/sportCategoryFragment"
@@ -39,7 +42,7 @@
     <fragment
         android:id="@+id/privacyPolicyFragment"
         android:name="com.league2022of.proball.fragments.NewPlayerInfoFragment"
-        android:label="Player Info"
+        android:label="Team Info"
         tools:layout="@layout/fragment_privacy_policy" >
         <action
             android:id="@+id/action_privacyPolicyFragment_to_sportCategoryFragment"
@@ -51,7 +54,7 @@
     <fragment
         android:id="@+id/myMatchesFragment"
         android:name="com.league2022of.proball.fragments.NewPlayerFragment"
-        android:label="New Player"
+        android:label="New Team"
         tools:layout="@layout/fragment_my_matches" >
         <action
             android:id="@+id/action_myMatchesFragment_to_privacyPolicyFragment"
@@ -92,5 +95,14 @@
         <action
             android:id="@+id/action_settingsFragment_to_sportCategoryFragment"
             app:destination="@id/sportCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/playerInfoFragment"
+        android:name="com.league2022of.proball.fragments.PlayerInfoFragment"
+        android:label="Player Info"
+        tools:layout="@layout/fragment_card_detail" >
+        <argument
+            android:name="playerModel"
+            app:argType="com.league2022of.proball.model.PlayerModel" />
     </fragment>
 </navigation>
